@@ -58,6 +58,8 @@ Copy-Item thrift_ep-install\lib\thrift.lib thrift_ep-install\lib\libthrift.a
 
 cmake --build .
 
+Get-ChildItem -Recurse -File -Include libparquet*
+
 cd ..
 
 ls .\build\release\
