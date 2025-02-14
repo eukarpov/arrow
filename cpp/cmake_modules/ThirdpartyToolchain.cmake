@@ -955,6 +955,8 @@ message(STATUS "Hello!")
 message(STATUS "1! ${EP_COMMON_TOOLCHAIN}")
 message(STATUS "2! ${EP_CXX_FLAGS}")
 
+string(APPEND EP_CXX_FLAGS " -target arm64-windows-msvc -shared")
+
 # External projects are still able to override the following declarations.
 # cmake command line will favor the last defined variable when a duplicate is
 # encountered. This requires that `EP_COMMON_CMAKE_ARGS` is always the first
@@ -965,7 +967,6 @@ set(EP_COMMON_CMAKE_ARGS
     -DBUILD_STATIC_LIBS=ON
     -DBUILD_TESTING=OFF
     -DCMAKE_BUILD_TYPE=${CMAKE_BUILD_TYPE}
-    -DCXX_COMMON_FLAGS="-target arm64-windows-msvc -shared"
     -DCMAKE_CXX_FLAGS=${EP_CXX_FLAGS}
     -DCMAKE_CXX_FLAGS_DEBUG=${EP_CXX_FLAGS_DEBUG}
     -DCMAKE_CXX_FLAGS_MISIZEREL=${EP_CXX_FLAGS_MINSIZEREL}
