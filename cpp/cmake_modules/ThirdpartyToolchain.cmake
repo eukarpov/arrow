@@ -879,8 +879,8 @@ set(EP_CXX_FLAGS "${CMAKE_CXX_FLAGS}")
 set(EP_C_FLAGS "${CMAKE_C_FLAGS}")
 if(NOT MSVC_TOOLCHAIN)
   # Set -fPIC on all external projects
-  string(APPEND EP_CXX_FLAGS " -fPIC")
-  string(APPEND EP_C_FLAGS " -fPIC")
+#  string(APPEND EP_CXX_FLAGS " -fPIC")
+#  string(APPEND EP_C_FLAGS " -fPIC")
 endif()
 
 # We pass MSVC runtime related options via
@@ -951,6 +951,12 @@ if(NOT MSVC)
   endif()
 endif()
 
+message(STATUS "Hello!")
+message(STATUS "1! ${EP_COMMON_TOOLCHAIN}")
+message(STATUS "2! ${EP_CXX_FLAGS}")
+
+string(APPEND EP_CXX_FLAGS " -target arm64-windows-msvc -shared")
+
 # External projects are still able to override the following declarations.
 # cmake command line will favor the last defined variable when a duplicate is
 # encountered. This requires that `EP_COMMON_CMAKE_ARGS` is always the first
@@ -972,6 +978,8 @@ set(EP_COMMON_CMAKE_ARGS
     -DCMAKE_C_FLAGS_MISIZEREL=${EP_C_FLAGS_MINSIZEREL}
     -DCMAKE_C_FLAGS_RELEASE=${EP_C_FLAGS_RELEASE}
     -DCMAKE_C_FLAGS_RELWITHDEBINFO=${EP_C_FLAGS_RELWITHDEBINFO}
+    -DCMAKE_C_COMPILER_WORKS=TRUE
+    -DCMAKE_CXX_COMPILER_WORKS=TRUE
     -DCMAKE_EXPORT_NO_PACKAGE_REGISTRY=${CMAKE_EXPORT_NO_PACKAGE_REGISTRY}
     -DCMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY=${CMAKE_FIND_PACKAGE_NO_PACKAGE_REGISTRY}
     -DCMAKE_INSTALL_LIBDIR=lib
